@@ -1,0 +1,51 @@
+header.h
+#pragma once
+int getMeasurement(int min = 0, int max = 10);
+
+quelle1.cpp
+#include <stdlib.h>
+#include<time.h>
+
+int getMeasurement(int min, int max)
+{
+	static bool first = true;
+
+	if (first)
+	{
+		first = false;
+		srand(time(NULL));
+	}
+
+	return min + (rand() % (int)(max - min + 1));
+}
+
+quelle2.cpp
+#include<iostream>
+using namespace std;
+#include"header.h"
+
+#define ANZ 10
+
+int main()
+{
+	int messwerte[ANZ];
+	double Mittelwert;
+	double Summe = 0;
+
+	for (int i = 0;i < ANZ;i++)
+	{
+		messwerte[i] = getMeasurement();
+		cout << "Messwert " << i + 1 <<":" << messwerte[i] << endl;
+	}
+
+	for (int i = 0;i < ANZ;i++)
+	{
+		Summe += messwerte[i];
+	}
+	cout << endl;
+	
+	Mittelwert = (Summe) / ANZ;
+
+	cout << "Mittelwert=" << Mittelwert << endl;
+ 
+}
